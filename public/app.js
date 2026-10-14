@@ -27,3 +27,22 @@ createBtn.addEventListener('click', () => {
     .then(response => response.json())                 // read the server's reply
     .then(data => console.log('Server replied:', data));
 });
+
+// Ask the server for all activities and show them on the page
+function loadActivities() {
+  fetch('/activities')                          // GET request: "give me the list"
+    .then(response => response.json())          // read the reply as JSON
+    .then(activities => {
+      const list = document.getElementById('activityList');  // find the <ul>
+      list.innerHTML = '';                      // empty it first, so nothing shows twice
+
+      // Go through the list, one activity at a time
+      activities.forEach(activity => {
+        const item = document.createElement('li');            // make a new <li>
+        item.textContent = activity.title + ' – ' + activity.date;  // its text
+        list.appendChild(item);                               // add it to the <ul>
+      });
+    });
+}
+
+loadActivities();   // run it once when the page loads
