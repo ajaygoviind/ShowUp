@@ -9,6 +9,7 @@ createBtn.addEventListener('click', () => {
   const title = document.getElementById('titleInput').value;
   const date = document.getElementById('dateInput').value;
 
+
   // Stop if the title is empty
   if (title === '') {
     console.log('Please enter a title');
@@ -25,7 +26,12 @@ createBtn.addEventListener('click', () => {
     body: JSON.stringify({ title: title, date: date }) // the data, as JSON text
   })
     .then(response => response.json())                 // read the server's reply
-    .then(data => console.log('Server replied:', data));
+    .then(data => {
+      console.log('Server replied:', data);
+      loadActivities();                                 //reload the list
+      document.getElementById('titleInput').value = ''; //empty title box
+      document.getElementById('dateInput').value = '';  //empty date box
+});
 });
 
 // Ask the server for all activities and show them on the page
