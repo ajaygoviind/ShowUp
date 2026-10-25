@@ -43,6 +43,27 @@ app.post('/activities' , (req,res) => {
   res.json(newActivity); //send it back as confirmation
 });
 
+// 👇 NEW
+//RSVP: someone responds to one activity
+app.post('/activities/:id/rsvp', (req, res) => {
+  const id = Number(req.params.id);                    // which activity? taken from the URL
+  const activity = activities.find(a => a.id === id);  // look for it in the list
+
+  // If no activity has that id, reply with an error
+  if (!activity) {
+    return res.status(404).json({ error: 'Activity not found' });
+  }
+
+  const rsvp = {
+    name: req.body.name,           // who is answering
+    status: req.body.status,       // 'present', 'absent' or 'unsure'
+    reason: req.body.reason || ''  // optional reason, empty if none given
+  };
+
+  activity.rsvps.push(rsvp);       // add the answer to that activity's list
+  res.json(activity);              // send back the updated activity
+});
+
 // Start the server, listening on PORT
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
