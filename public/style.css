@@ -1,0 +1,68 @@
+/* style.css — how ShowUp looks */
+
+/* Whole page */
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;      /* light grey background */
+  color: #222;              /* dark text */
+  max-width: 600px;         /* don't stretch too wide on big screens */
+  margin: 0 auto;           /* centre the page */
+  padding: 16px;            /* space around the edges */
+}
+
+h1 {
+  color: #2b6cb0;           /* blue title */
+}
+
+/* Input boxes */
+input {
+  padding: 10px;
+  margin: 4px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;       /* rounded corners */
+  font-size: 16px;
+}
+
+/* All buttons */
+button {
+  padding: 8px 14px;
+  margin: 4px 4px 4px 0;
+  border: none;
+  border-radius: 6px;
+  background: #2b6cb0;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;          /* hand cursor on hover */
+}
+
+button:hover {
+  background: #22558c;      /* darker blue when the mouse is over it */
+}
+
+/* Activity list: each activity becomes a white card */
+#activityList {
+  list-style: none;         /* remove the bullet points */
+  padding: 0;
+}
+
+#activityList li {
+  background: white;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);  /* soft shadow */
+}
+
+#activityList p {
+  margin: 6px 0 0;
+  color: #555;              /* RSVP answers in grey */
+  font-size: 14px;
+}
+
+/* Phones: on narrow screens, input boxes take the full width */
+@media (max-width: 500px) {
+  input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
