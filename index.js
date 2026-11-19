@@ -7,8 +7,8 @@ const PORT = 3000;                           // the port our server will listen 
 app.use(express.json());           // let Express read JSON sent in requests
 app.use(express.static('public')); // serve the files in /public to the browser
 
-// NEW: open the database file (it gets created the first time)
-const db = new Database('showup.db');
+// Use the database file given by DB_FILE (tests use a temporary one), otherwise showup.db
+const db = new Database(process.env.DB_FILE || 'showup.db');
 
 // NEW: create the two tables, but only if they don't exist yet
 db.exec(`
@@ -84,11 +84,17 @@ app.post('/activities/:id/rsvp', (req, res) => {
   res.json(activity);
 });
 
-// Start the server, listening on PORT
-app.listen(PORT, (error) => {
-  if (error) {
-    console.log('Could not start the server:', error);  // show what went wrong
-    return;
-  }
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+// Start the server only when this file is run directly (node index.js),
+// not when the tests load it
+if (require.main === module) {
+  app.listen(PORT, (error) => {
+    if (error) {
+      console.log('Could not start the server:', error);
+      return;
+    }
+    console.log(`Server running at http://localhost:${PORT}`);
+  });
+}
+
+// Let the test file use the app
+module.exports = app;
