@@ -1,3 +1,6 @@
+// app.js — runs in the browser. It lets users create activities,
+// shows the list of activities, and sends RSVP responses to the server.
+
 // Grab the Create button from the page using its id
 const createBtn = document.getElementById('createBtn');
 
@@ -13,7 +16,7 @@ createBtn.addEventListener('click', () => {
     return;
   }
 
-  // Send the new activity to the server
+  // Send the new activity (title and date) to the server to be saved
   fetch('/activities', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -65,7 +68,8 @@ function loadActivities() {
     });
 }
 
-// NEW: send one RSVP to the server
+// Send one person's RSVP response (present, absent or unsure, plus an optional reason)
+// for a specific activity to the server, then reload the list
 function sendRsvp(activityId, status) {
   const name = document.getElementById('nameInput').value;
 

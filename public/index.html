@@ -4,21 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ShowUp</title>
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <h1>ShowUp</h1>
-    <input type="text" id="nameInput" placeholder="Your name">
+
+  <!-- The user types their name here once; it is used for every RSVP they send -->
+  <input type="text" id="nameInput" placeholder="Your name">
 
   <h2>Create an activity</h2>
+  <!-- Form for a new activity: title, date, and the Create button -->
   <input type="text" id="titleInput" placeholder="Activity title">
   <input type="date" id="dateInput">
   <button id="createBtn">Create</button>
 
   <h2>Activities</h2>
+  <!-- Empty at first; app.js fills it with the activities from the server when the page loads -->
   <ul id="activityList"></ul>
 
+  <!-- Load the JavaScript that makes the page work -->
   <script src="app.js"></script>
 </body>
 </html>
